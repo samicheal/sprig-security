@@ -5,18 +5,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.pluralsight.security.entity.CryptoCurrency;
 import com.pluralsight.security.model.CryptoCurrencyDto;
 import com.pluralsight.security.repository.CryptoCurrencyRepository;
+
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
 public class CurrencyQueryServiceNoSql implements CurrencyQueryService {
 
-	private final CryptoCurrencyRepository cryproRepository;
+	@Autowired
+	private CryptoCurrencyRepository cryproRepository;
+
 	private Map<String, CryptoCurrencyDto> cryptoCurrencies = null;
 
 	@Override

@@ -1,16 +1,18 @@
 package com.pluralsight.security.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
+@AllArgsConstructor
 @Getter
 public class TransactionDetailsDto {
 
-	private final String id;
-	private final String symbol;
-	private final String type;
-	private final String quantity;
-	private final String price;
+	private String id;
+	private String symbol;
+	private String type;
+	private String quantity;
+	private String price;
 	
 }

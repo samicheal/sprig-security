@@ -2,17 +2,20 @@ package com.pluralsight.security.model;
 
 import java.util.List;
 import java.util.Map;
+
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
+@AllArgsConstructor
 @Getter
 public class PortfolioPositionsDto {
 
-	private final String firstName;
-	private final String lastname;
-	private final List<PositionDto> positions;
-	private final Map<String, String> cryptoCurrencies;
+	private String firstName;
+	private String lastname;
+	private List<PositionDto> positions;
+	private Map<String, String> cryptoCurrencies;
 	
 	public PositionDto getPositionForCrypto(CryptoCurrencyDto crypto) {
 		PositionDto position = null;
@@ -24,5 +27,4 @@ public class PortfolioPositionsDto {
 		}
 		return position;
 	}
-	
 }

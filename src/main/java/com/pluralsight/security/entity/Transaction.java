@@ -1,9 +1,11 @@
 package com.pluralsight.security.entity;
 
 import java.math.BigDecimal;
+
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
@@ -30,5 +32,32 @@ public class Transaction {
 		this.timestamp=timestamp;
 		this.id = new ObjectId().toHexString();
 	}
-	
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public CryptoCurrency getCryptoCurrency() {
+		return cryptoCurrency;
+	}
+
+	public Type getType() {
+		return type;
+	}
+
+	public BigDecimal getQuantity() {
+		return quantity;
+	}
+
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public long getTimestamp() {
+		return timestamp;
+	}
 }

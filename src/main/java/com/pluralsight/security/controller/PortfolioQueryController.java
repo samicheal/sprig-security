@@ -3,22 +3,27 @@ package com.pluralsight.security.controller;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.pluralsight.security.model.AddTransactionToPortfolioDto;
 import com.pluralsight.security.model.DeleteTransactionsDto;
 import com.pluralsight.security.model.ListTransactionsDto;
 import com.pluralsight.security.model.TransactionDetailsDto;
 import com.pluralsight.security.service.PortfolioQueryService;
+
 import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
 public class PortfolioQueryController {
 
-	private final PortfolioQueryService portfolioService;
+	@Autowired
+	private PortfolioQueryService portfolioService;
 
 	@GetMapping("/")
 	public String index() {

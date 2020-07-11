@@ -1,15 +1,14 @@
 package com.pluralsight.security.entity;
 
 import javax.validation.constraints.Email;
+
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
 
 @Document
 @RequiredArgsConstructor
+@NoArgsConstructor
 @Getter
 @ToString
 public class User {
@@ -17,7 +16,7 @@ public class User {
 	@Id
 	private String id;
 	@NonNull
-	private final String username;
+	private String username;
 	@NonNull
 	private String firstName;
 	@NonNull

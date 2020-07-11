@@ -3,23 +3,37 @@ package com.pluralsight.security.entity;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @Document
-@RequiredArgsConstructor
+@NoArgsConstructor
 @Getter
 public class Portfolio {
 
 	@Id
 	private String id;
 	@NonNull
-	private final String username;
-	private final List<Transaction> transactions;
-	
+	private String username;
+	private List<Transaction> transactions;
+
+	public Portfolio(String id, List<Transaction> transactions) {
+		this.id = id;
+		this.transactions = transactions;
+	}
+
+    public Portfolio(String id, String username, List<Transaction> transactions) {
+        this.id = id;
+        this.username = username;
+        this.transactions = transactions;
+    }
+
 	public void addTransaction(Transaction transaction) {
 		this.transactions.add(transaction);
 	}
