@@ -31,11 +31,17 @@ public class AdminSecurityConfiguration extends WebSecurityConfigurerAdapter {
         DigestAuthenticationFilter filter = new DigestAuthenticationFilter();
         filter.setUserDetailsService(userDetailsServiceBean());
         filter.setAuthenticationEntryPoint(getDigestEntryPoint());
+        //for penetration test: lines 35 and 36
+        filter.setPasswordAlreadyEncoded(true); // prevents filter from generating HA1 but uses one obtained from userdetails service
+        filter.setCreateAuthenticatedToken(true); //forces digest to use the encrypted token from the userdetails service
         return filter;
     }
 
     private DigestAuthenticationEntryPoint getDigestEntryPoint(){
-        DigestAuthenticationEntryPoint entryPoint = new DigestAuthenticationEntryPoint();
+        // DigestAuthenticationEntryPoint entryPoint = new DigestAuthenticationEntryPoint(); //default from spring security
+
+        // Custom DigestAuthenticationEntryPoint to override default stale=true property used for digest authentication
+        CustomDigestAuthenticationEntryPointClass entryPoint = new CustomDigestAuthenticationEntryPointClass();
         entryPoint.setRealmName("admin-digest-realm");
         entryPoint.setKey("fjkf33DD312_+");
         return entryPoint;
@@ -43,12 +49,13 @@ public class AdminSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth)throws Exception{
+        //.password("18d94adb9db016d4aed2502f88ca6e56") //password already encrypted using MD5
         auth.inMemoryAuthentication()
                 .withUser("user")
                 .password("password1")
                 .roles("USER")
         .and().withUser("admin")
-                .password("password2")
+                 .password("password2")
                 .roles("ADMIN");
     }
 
